@@ -1,0 +1,21 @@
+import os
+import zipfile
+import pandas as pd
+import numpy as np
+from six.moves import urllib
+
+#metodo para descargar y descomprimir archivos zip
+
+def download_lap_data(lap_url, lap_path):
+    if not os.path.isdir(lap_path):
+        os.makedirs(lap_path)
+    zip_path = os.path.join(lap_path, "diamonds.zip")
+    urllib.request.urlretrieve(lap_url, zip_path)
+    lap_zip = zipfile.ZipFile(zip_path)
+    lap_zip.extractall(path=lap_path)
+    
+#metodo para leer archivo tipo csv
+    
+def read_lap_data(lap_path, lap_name):
+    csv_path = os.path.join(lap_path, lap_name)
+    return pd.read_csv(csv_path)
